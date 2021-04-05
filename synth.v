@@ -62,11 +62,11 @@ module synth
         .seg7(SVNSEG_SEG7)
     );
 
-    parameter A = 11367;
-
     tonegen tonegen_inst
     (
         .clk(FPGA_CLK),
+        .data(data_byte),
+        .data_valid(valid),
         .signal(BEEP)
     );
 
