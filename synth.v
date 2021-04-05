@@ -1,4 +1,5 @@
-module synth(
+module synth
+(
     input FPGA_CLK,
     input UART_RXD,
     output UART_TXD,
@@ -13,7 +14,9 @@ module synth(
     output SVNSEG_SEG4,
     output SVNSEG_SEG5,
     output SVNSEG_SEG6,
-    output SVNSEG_SEG7);
+    output SVNSEG_SEG7,
+    output BEEP
+);
 
     wire rx = !UART_RXD;
     wire tx;
@@ -22,19 +25,24 @@ module synth(
     reg valid;
     reg [7:0] data_byte;
 
-    uart_rx uart_rx_inst(
+    uart_rx uart_rx_inst
+    (
         .clk(FPGA_CLK),
         .uart_rxd(rx),
         .data(data_byte),
-        .data_valid(valid));
+        .data_valid(valid)
+    );
 
-    uart_tx uart_tx_inst(
+    uart_tx uart_tx_inst
+    (
         .clk(FPGA_CLK),
         .data(data_byte),
         .data_valid(valid),
-        .uart_txd(tx));
+        .uart_txd(tx)
+    );
 
-    svnseg_controller controller_inst(
+    svnseg_controller controller_inst
+    (
         .clk(FPGA_CLK),
         .num3(4'h0),
         .num2(4'h0),
@@ -51,6 +59,15 @@ module synth(
         .seg4(SVNSEG_SEG4),
         .seg5(SVNSEG_SEG5),
         .seg6(SVNSEG_SEG6),
-        .seg7(SVNSEG_SEG7));
+        .seg7(SVNSEG_SEG7)
+    );
+
+    parameter A = 11367;
+
+    tonegen tonegen_inst
+    (
+        .clk(FPGA_CLK),
+        .signal(BEEP)
+    );
 
 endmodule
