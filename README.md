@@ -1,6 +1,6 @@
 # synth
 
-all digital monophonic synthesizer
+all digital monophonic square wave synthesizer
 
 ## Results
 Sequence for Do-Re-Mi:
