@@ -3,6 +3,8 @@
 all digital monophonic square wave synthesizer
 
 ## Results
+with `sudo screen /dev/ttyUSB0 115200`
+
 Sequence for Do-Re-Mi:
 
 ![Sequence for Do-Re-Mi](results/sequence.png)
